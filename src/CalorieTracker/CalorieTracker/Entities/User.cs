@@ -8,7 +8,19 @@ namespace CalorieTracker.Entities
 
     public class User
     {
-        [Key]
+
+        public User(int userId, string username, string password, string email,int personId)
+        {
+            UserID = userId;
+            UserName = username;
+            Password = password;
+            Email = email;
+            PersonID = personId;
+
+		}
+
+
+		[Key]
         [Column("UserID")]
         public int UserID { get; set; }
         [Column("Username")]

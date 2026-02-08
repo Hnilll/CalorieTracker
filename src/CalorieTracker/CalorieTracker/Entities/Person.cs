@@ -7,11 +7,25 @@ namespace CalorieTracker.Entities
 
     public class Person
     {
-        [Key]
+
+
+        public Person(int personId, string pname, int height, int weight,int foodId)
+        {
+
+            PersonID = personId;
+            PName = pname;
+            Height = height;
+            Weight = weight;
+            FoodID = foodId;
+
+		}
+
+
+		[Key]
         [Column("PersonID")]
         public int PersonID { get; set; }
 
-        [Column("Name")]
+        [Column("PName")]
         public string PName { get; set; }
 
         [Column("Height")]
