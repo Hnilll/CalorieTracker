@@ -32,7 +32,7 @@ namespace CalorieTracker.Controllers
 		{
 			//1. Zkontrolovat zdali uživatel vůbec existuje
 			User? user = _dbContext.Users
-				.FirstOrDefault(u => u.Username == model.Username && u.Password == model.Password);
+				.FirstOrDefault(u => u.UserName == model.Username && u.Password == model.Password);
 			if (user == null)
 			{
 				return View(model);
@@ -41,8 +41,8 @@ namespace CalorieTracker.Controllers
 			//2. Sestavit "identitu/totožnost" uživatele pomocí Claims
 			List<Claim> claims = new List<Claim>();
 
-			Claim idClaim = new Claim("id", user.Id.ToString());
-			Claim usernameClaim = new Claim("username", user.Username);
+			Claim idClaim = new Claim("id", user.UserID.ToString());
+			Claim usernameClaim = new Claim("username", user.UserName);
 
 			claims.Add(idClaim);
 			claims.Add(usernameClaim);

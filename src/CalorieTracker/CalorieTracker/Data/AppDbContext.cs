@@ -8,6 +8,10 @@ namespace CalorieTracker.Data
 	{
 		public DbSet<Food> Foods { get; set; }
 
+		public DbSet<User> Users { get; set; }
+
+		
+
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
 			optionsBuilder.UseMySQL("server=mysqlstudenti.litv.sssvt.cz;database=4c1_kvechsimon_db2;user=kvechsimon;password=123456");

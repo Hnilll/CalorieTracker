@@ -1,0 +1,35 @@
+﻿@using CalorieTracker.Models
+@using CalorieTracker.Entities
+@model List<CalorieTracker.Entities.Food> 
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<a class="btn btn-primary mb-2" asp-controller="FoodV" asp-action="Create">Add</a> 
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Calories</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Food food in Model)
+        {
+            <tr>
+                <td>@food.Name</td>
+                <td>@food.TotalCal</td>
+                <td>
+                    <a class="btn btn-secondary" asp-controller="Foods" asp-action="Detail" asp-route-id="@food.FoodId">Detail</a>
+                    
+                    <button class="btn-danger">Delete</button>
+                </td>
+            </tr>
+        }
+	</tbody>
+    </table>

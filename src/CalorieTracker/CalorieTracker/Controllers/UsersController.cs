@@ -3,6 +3,8 @@ using CalorieTracker.Entities;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using CalorieTracker.Models.Auth;
+using Microsoft.AspNetCore.Authentication;
 
 namespace CalorieTracker.Controllers
 {
@@ -27,14 +29,15 @@ namespace CalorieTracker.Controllers
 		[HttpGet]
 		public IActionResult Login()
 		{
-			LoginVewModel model = new LoginVewModel();
+			LoginViewModel model = new LoginViewModel();
+			return View(model);
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Login(LoginVewModel model)
+		public async Task<IActionResult> Login(LoginViewModel model)
 		{
-			ApplicationUser? user = DbContext.Users
-				.FirstOrDefault(u => u.Username == model.Username && u.Password == model.Password);
+			User? user = DbContext.Users
+				.FirstOrDefault(u => u.UserName == model.Username && u.Password == model.Password);
 			if (user == null)
 			{
 				return View(model);
@@ -43,8 +46,8 @@ namespace CalorieTracker.Controllers
 
 			List<Claim> claims = new List<Claim>();
 
-			Claim = new claims("id", user.Id.ToString());
-			Claim idClaim = new Claim("username", user.Username);
+			Claim claim = new Claim ("id", user.UserID.ToString());
+			Claim idClaim = new Claim("username", user.UserName);
 			ClaimsIdentity identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 			ClaimsPrincipal principal = new ClaimsPrincipal(identity);
 
