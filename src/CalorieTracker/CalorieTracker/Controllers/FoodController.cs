@@ -4,21 +4,25 @@ using CalorieTracker.Entities;
 
 namespace CalorieTracker.Controllers
 {
-	public class FoodsController : Controller
+	public class FoodController : Controller
 	{
-		public AppDbContext DbContext { get; set; }
+		//public AppDbContext DbContext { get; set; }
+
+		private readonly AppDbContext _context;
 
 		public List<Food> Foods { get; set; }
 
-		public FoodsController()
+		public FoodController(AppDbContext context)
 		{
-			DbContext = new AppDbContext();
-			
-			Foods = DbContext.Foods.ToList();
+			//DbContext = new AppDbContext();
+
+			_context = context;
+
+			Foods = _context.Foods.ToList();
 		}
 
 		[HttpGet]
-		public IActionResult List()
+		public IActionResult Food() 
 		{
 			return View(Foods);
 		}

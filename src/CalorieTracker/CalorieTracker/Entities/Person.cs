@@ -8,15 +8,20 @@ namespace CalorieTracker.Entities
     public class Person
     {
 
+		// Tento řádek propojí uživatele s jeho jídly v C# kódu
+		public List<Food> Foods { get; set; } = new List<Food>();
 
-        public Person(int personId, string pname, int height, int weight,int foodId)
+		public Person() { }
+
+        public Person(int personId, string pname,int age, int height, int weight)
         {
 
             PersonID = personId;
             PName = pname;
-            Height = height;
+            Age = age;
+			Height = height;
             Weight = weight;
-            FoodID = foodId;
+            
 
 		}
 
@@ -28,14 +33,16 @@ namespace CalorieTracker.Entities
         [Column("PName")]
         public string PName { get; set; }
 
-        [Column("Height")]
+        [Column("Age")]
+        public int Age { get; set; }
+
+		[Column("Height")]
         public int Height { get; set; }
 
 
         [Column("Weight")]
         public int Weight { get; set; }
 
-        [Column("FoodID")]
-        public int FoodID { get; set; }
+        
     }
 }

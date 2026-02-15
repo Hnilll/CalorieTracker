@@ -15,9 +15,10 @@ namespace CalorieTracker.Controllers
 
 		private readonly AppDbContext _dbContext;
 
-		public  AuthController()
+		public  AuthController(AppDbContext context)
 					{
-			_dbContext = new AppDbContext();
+			/*_dbContext = new AppDbContext();*/
+			_dbContext = context;
 		}
 
 		[HttpGet]
@@ -54,7 +55,7 @@ namespace CalorieTracker.Controllers
 			await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
 			return RedirectToAction("Index", "Dashboard");
-		}
+		}   
 
 	}
 }

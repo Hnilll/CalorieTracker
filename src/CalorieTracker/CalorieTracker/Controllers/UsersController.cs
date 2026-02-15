@@ -11,14 +11,12 @@ namespace CalorieTracker.Controllers
 	public class UsersController : Controller
 	{
 
-		public AppDbContext DbContext { get; set; }
-		public List<User> Users { get; set; }
+		private readonly AppDbContext _context;
 
-		public UsersController()
+		public UsersController(AppDbContext context)
 		{
-			DbContext = new AppDbContext();
-			Users = DbContext.Users.ToList();
 
+			_context = context;
 		}
 
 		public IActionResult Index()
@@ -36,7 +34,7 @@ namespace CalorieTracker.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Login(LoginViewModel model)
 		{
-			User? user = DbContext.Users
+			User? user = _context.Users
 				.FirstOrDefault(u => u.UserName == model.Username && u.Password == model.Password);
 			if (user == null)
 			{

@@ -9,14 +9,15 @@ namespace CalorieTracker.Entities
     public class Food
     {
 
-	    private Food() { }
+	    public Food() { }
 
-		public Food(int Id, string name, int totalCal, int personId)
+		public Food(int Id, string name, int totalCal, int weight, int personId)
 		{
             FoodId = Id;
             Name = name;
             TotalCal = totalCal;
-            PersonID = personId;
+            Weight = weight;
+			PersonID = personId;
 		}
 
 		[Key]
@@ -27,8 +28,14 @@ namespace CalorieTracker.Entities
         [Column("TotalCal")]
         public int TotalCal { get; set; }
 
-        [Column("PersonID")]
-        public int PersonID {  get; set; }
+        [Column("Weight")]
+        public int Weight { get; set; }
+
+        [Column("PersonID")]    
+        public int PersonID { get; set; }
+
+		[ForeignKey("PersonID")]
+        public Person Person {  get; set; }
 
     }
 }

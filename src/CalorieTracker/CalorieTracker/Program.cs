@@ -1,36 +1,54 @@
+using Microsoft.EntityFrameworkCore;
+using CalorieTracker.Data;
+using Pomelo.EntityFrameworkCore.MySql;	
+
 namespace CalorieTracker
 {
     public class Program
     {
         public static void Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            builder.Services.AddControllersWithViews();
+			var builder = WebApplication.CreateBuilder(args);
 
-            var app = builder.Build();
+			// 1. Získání Connection Stringu ze souboru appsettings.json
+			var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-            // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
-            {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+			
+			// 2. Registrace AppDbContextu pro MySQL
+			builder.Services.AddDbContext<AppDbContext>(options =>
+			{
+				// Tento zápis vynutí použití správné metody z balíèku Pomelo
+				var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+				var serverVersion = Microsoft.EntityFrameworkCore.ServerVersion.AutoDetect(connectionString);
+				options.UseMySql(connectionString, serverVersion);
+			});
 
-            app.UseHttpsRedirection();
-            app.UseRouting();
+			// Pøidání služeb pro MVC (Modely, View, Controllery)
+			builder.Services.AddControllersWithViews();
 
-            app.UseAuthorization();
+			var app = builder.Build();
 
-            app.MapStaticAssets();
-            app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}")
-                .WithStaticAssets();
+			// Konfigurace HTTP request pipeline (Middleware)
+			if (!app.Environment.IsDevelopment())
+			{
+				app.UseExceptionHandler("/Home/Error");
+				app.UseHsts();
+			}
 
-            app.Run();
-        }
+			app.UseHttpsRedirection();
+			app.UseStaticFiles(); // Dùležité pro CSS (Bootstrap) a obrázky
+
+			app.UseRouting();
+
+			app.UseAuthorization();
+
+			// Nastavení routování (jak se mapují URL na Controllery)
+			app.MapControllerRoute(
+				name: "default",
+				pattern: "{controller=Home}/{action=Index}/{id?}");
+
+			app.Run();
+		}
     }
 }

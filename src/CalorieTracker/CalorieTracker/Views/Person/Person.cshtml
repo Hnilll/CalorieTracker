@@ -1,0 +1,38 @@
+﻿@using CalorieTracker.Models;
+@using CalorieTracker.Entities;
+@using Microsoft.EntityFrameworkCore;
+@using Microsoft.AspNetCore.Mvc;
+
+@model CalorieTracker.Entities.Person
+
+<div class="container mt-5">
+    <div class="card shadow border-0">
+        <div class="card-header bg-info text-white">
+            <h4 class="mb-0">Informace o uživateli</h4>
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-sm-3 font-weight-bold">Jméno:</div>
+                <div class="col-sm-9">@Model.PName</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-3 font-weight-bold">Věk:</div>
+                <div class="col-sm-9">@Model.Age let</div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-sm-3 font-weight-bold">Váha:</div>
+                <div class="col-sm-9">@Model.Weight Kg</div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-sm-3 font-weight-bold">Výška:</div>
+				<div class="col-sm-9">@Model.Height cm</div>
+
+            <hr />
+            <div class="text-end">
+                <a asp-action="Edit" class="btn btn-warning">Upravit údaje</a>
+            </div>
+        </div>
+    </div>
+</div>

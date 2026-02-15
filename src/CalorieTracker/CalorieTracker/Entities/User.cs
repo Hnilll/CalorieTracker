@@ -9,6 +9,10 @@ namespace CalorieTracker.Entities
     public class User
     {
 
+        public User() //Pro vytváření 
+        { }
+
+
         public User(int userId, string username, string password, string email,int personId)
         {
             UserID = userId;
