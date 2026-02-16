@@ -1,5 +1,25 @@
-﻿namespace CalorieTracker.Views.FoodV
-{
-    public class Create
-    {
-    }
+﻿@using CalorieTracker.Models
+@using CalorieTracker.Entities
+@model CalorieTracker.Entities.Food
+
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TotalCal"></label>
+        <input asp-for="TotalCal" class="form-control" />
+        <span asp-validation-for="TotalCal" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Weight"></label>
+        <input asp-for="Weight" class="form-control" />
+        <span asp-validation-for="Weight" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+

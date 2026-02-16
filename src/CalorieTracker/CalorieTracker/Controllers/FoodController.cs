@@ -34,5 +34,12 @@ namespace CalorieTracker.Controllers
 			Food  food = Foods.First(s => s.FoodId == id);
 			return View(food);
 		}
-	}
+
+		
+		[HttpGet]
+		public IActionResult Create() //Pro vytváření nového jídla.
+        {
+			return View();
+		}
+    }
 }

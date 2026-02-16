@@ -62,9 +62,9 @@
 
 
 <h1 class="title">Dish list</h1>
-<button type="button" class="addBtn" data-bs-toggle="modal" data-bs-targer="#foodModal">Add dish</button>
+@*<button type="button" class="addBtn" data-bs-toggle="modal" data-bs-targer="#foodModal">Add dish</button>*@
 
-
+<a class="btn btn-secondary" asp-controller="Food" asp-action="Create">Add dish</a>
 
 <table class="table">
     <thead>
@@ -83,7 +83,7 @@
                 <td>@food.TotalCal</td>
 				<td>@food.Weight</td> 
                 <td>
-                    <a class="btn btn-secondary" asp-controller="Food" asp-action="Detail" asp-route-id="@food.FoodId">Detail</a>
+                    <a class="btn btn-secondary" asp-controller="Food" asp-action="Ingredients" asp-route-id="@food.FoodId">Detail</a>
                     
                     <button style="color: red">Delete</button>
                 </td>
